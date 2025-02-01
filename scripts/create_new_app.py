@@ -1,6 +1,5 @@
 import sys
 import gcp_operations
-import subscribe_new_product
 
 def create_new_app(apigee_url, apigee_developer, app_name, token):
 
