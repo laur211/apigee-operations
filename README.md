@@ -1,6 +1,6 @@
-![Diagram](https://raw.githubusercontent.com/laur211/apigee-operations/master/apigee_workflow_diagram.drawio.png)
-
 # Apigee Operations GitHub Action
+
+![Diagram](https://raw.githubusercontent.com/laur211/apigee-operations/master/apigee_workflow_diagram.drawio.png)
 
 ## Overview
 This GitHub Action automates Apigee application management, including validating API products, checking for existing applications, creating new applications, and subscribing them to API products. It is triggered manually via `workflow_dispatch`.
