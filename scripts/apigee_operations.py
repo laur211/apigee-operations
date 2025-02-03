@@ -8,7 +8,7 @@ def check_product_exists(apigee_url, product, token):
     response = requests.get(f"{url}/{product}", headers=headers)
     print(response)
 
-    print(f"Response Code: {response.status_code}")  # Print status code
+    print(f"Response Code: {response.status_code}")
 
     if response.status_code != 200:
       print(f"Request failed with http status code: {response.status_code}")
@@ -19,7 +19,7 @@ def check_app_exists(apigee_url, apigee_developer, app_name, token):
     headers = {"Authorization": f"Bearer {token}"}
     response = requests.get(url, headers=headers)
 
-    print(f"Response Code: {response.status_code}")  # Print status code
+    print(f"Response Code: {response.status_code}")
 
     if response.status_code == 200:
         print("appExists=true")
@@ -117,4 +117,4 @@ def create_new_app(apigee_url, apigee_developer, app_name, token):
     create_app_response = create_app(apigee_url, apigee_developer, app_name, token)
     consumer_key_auto_generated = create_app_response['credentials'][0]['consumerKey']
 
-    delete_response = delete_consumer_key(apigee_url, apigee_developer, app_name, consumer_key_auto_generated, token)
+    delete_consumer_key(apigee_url, apigee_developer, app_name, consumer_key_auto_generated, token)

@@ -6,14 +6,15 @@ on:
       APP_NAME:
         description: 'The name of the application in Apigee'
         required: true
-        
+        default: 'DUMMY_APP'
       CONSUMER_KEY:
         description: 'The consumer key for the new application'
         required: true
-        
+        default: 'custom-key'
       API_PRODUCT:
         description: 'The name of the API product to associate with the app'
         required: true
+        default: 'DEV_M2M_DUMMY_PROXY_ALL'
 
 jobs:
   apigee_operations:
@@ -33,27 +34,8 @@ jobs:
       - name: Set environment variables
         run: |
           echo "TOKEN=${{ secrets.TOKEN }}" >> $GITHUB_ENV
-          echo "APIGEE_DEVELOPER=TBD" >> $GITHUB_ENV
-          echo "APIGEE_URL=https://apigee.googleapis.com/v1/organizations/TBD" >> $GITHUB_ENV
-
-
-      - name: Validate product
-        id: check_product
-        run: |
-          python3 scripts/validate_product.py "$APIGEE_URL" "${{ github.event.inputs.API_PRODUCT }}" "$TOKEN"
-          
-      - name: Verify App Existence
-        id: verify_app
-        run: |
-          EXISTS=$(python3 scripts/check_apigee_app.py "$APIGEE_URL" "$APIGEE_DEVELOPER" "${{ github.event.inputs.APP_NAME }}" "$TOKEN")
-          echo "App Exists: $EXISTS"
-          echo "appExists=$EXISTS" >> $GITHUB_OUTPUT
-
-      - name: Create new app
-        if: steps.verify_app.outputs.appExists != 'true'
-        run: |
-            python3 scripts/create_new_app.py "$APIGEE_URL" "$APIGEE_DEVELOPER" "${{ github.event.inputs.APP_NAME }}" "$TOKEN"
+          echo "APIGEE_DEVELOPER={developer - TBD}" >> $GITHUB_ENV
+          echo "APIGEE_URL=https://apigee.googleapis.com/v1/organizations/{org - TBD}" >> $GITHUB_ENV
     
-      - name: Subscribe product to app
-        run: |
-          python3 scripts/subscribe_new_product.py "$APIGEE_URL" "$APIGEE_DEVELOPER" "${{ github.event.inputs.APP_NAME }}" "${{ github.event.inputs.CONSUMER_KEY }}" "${{ github.event.inputs.API_PRODUCT }}" "$TOKEN"
+      - name: Run python script
+        run: python3 scripts/automate_apigee_operations.py "$APIGEE_URL" "$APIGEE_DEVELOPER" "${{ github.event.inputs.APP_NAME }}" "${{ github.event.inputs.CONSUMER_KEY }}" "${{ github.event.inputs.API_PRODUCT }}" "$TOKEN"
