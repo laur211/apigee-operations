@@ -6,15 +6,14 @@ on:
       APP_NAME:
         description: 'The name of the application in Apigee'
         required: true
-        default: 'DUMMY_APP'
+      
       CONSUMER_KEY:
         description: 'The consumer key for the new application'
         required: true
-        default: 'custom-key'
+      
       API_PRODUCT:
         description: 'The name of the API product to associate with the app'
         required: true
-        default: 'DEV_M2M_DUMMY_PROXY_ALL'
 
 jobs:
   apigee_operations:
