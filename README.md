@@ -50,7 +50,7 @@ Trigger this workflow manually from the GitHub Actions tab by providing the requ
 
 ## Scripts Used
 - `scripts/apigee_operations.py` - Contains the core functions to interact with Apigee's API, such as checking for existing apps and products, creating new apps, and associating API products with apps.
-- `scripts/automate_apigee_operations.py` - - This script orchestrates the different operations and runs based on the input parameters provided when the GitHub Action is triggered.
+- `scripts/automate_apigee_operations.py` - This script orchestrates the different operations and runs based on the input parameters provided when the GitHub Action is triggered.
 
 ## Notes
 - Ensure that `APIGEE_URL` and `APIGEE_DEVELOPER` are correctly set before running this workflow.
